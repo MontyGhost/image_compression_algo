@@ -1,4 +1,5 @@
 from compress import display, compress, extract
+import os
 
 def read_image(filename, splt=False):
     with open(filename, 'r') as f:
@@ -11,9 +12,10 @@ def read_image(filename, splt=False):
 if __name__ == "__main__":
 
     data = []
-    filename = "7.txt"
+    filename = "batman.txt"
 
     data = read_image("images/" + filename, True)
+    # print data
     display(data)
 
     compress(data, filename)
@@ -23,3 +25,10 @@ if __name__ == "__main__":
     data = extract(data, filename, med, size)
     # print data
     display(data)
+
+    original_size = os.path.getsize("images/" + str(filename))
+    compressed_size = os.path.getsize("compress/cmp_" + str(filename))
+    print "File size"
+    print "Original Size : ", original_size
+    print "Compressed Size : ", compressed_size
+    print "Compression factor : ", float(original_size)/compressed_size
